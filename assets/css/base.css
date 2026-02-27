@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster&display=swap");
+:root {
+  /* color background */
+  --primary-color: #6f4e37;
+  --secondary-color: #c19371;
+  --light-color: #f5f5dc;
+  --dark-color: #4b3621;
+
+  /* color text */
+  --text-main: #2b2222;
+  --text-sub: #5c523c;
+
+  /* font */
+  --font-main: "Lobster", sans-serif;
+  --font-sub: "Inter", sans-serif;
+}
