@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/home.css" />
+
+    <title>Đánh giá</title>
+</head>
+
+
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <header>
+
+            <nav class="menu">
+
+                <ul class="menu-list">
+
+                    <li class="menu-item has-dropdown">
+
+                       <a href="danhgia.html" class="active has-arrow danhgia-title">
+    Đánh Giá
+</a>
+
+                        <ul class="dropdown big-dropdown">
+
+                            <li>
+                                <a href="#" id="openFilter">Reviews gần đây</a>
+                            </li>
+
+                            <li>
+                                <a href="#"id="bestSeller">Best Seller</a>
+                            </li>
+
+                            <li>
+                                <a href="#" id ="bestTaste">Best Taste</a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+
+            </nav>
+
+        </header>
+
+
+        <!-- MAIN -->
+        <main>
+
+            <section class="review-list container my-5">
+
+                <!-- FILTER -->
+
+                <div class="review-filter" id="reviewFilter">
+
+                 <label>
+                    <input type="radio" name="reviewFilter" value="all" checked>
+                            <strong>Show all reviews</strong>
+                </label>
+
+                <label>
+                    <input type="radio" name="reviewFilter" value="drinks">
+                            <strong>Show Coffee Drinks reviews only</strong>
+                </label>
+
+                <label>
+                    <input type="radio" name="reviewFilter" value="beans">
+                            <strong>Show Coffee Beans reviews only</strong>
+                </label>
+
+                </div>
+
+                <!-- REVIEW GRID -->
+
+                <div class="row mt-4" id="reviewsContainer"></div>
+
+                    </section>
+
+        </main>
+
+                </div>
+
+                
+
+</div>
+
+
+
+<script>
+
+
+/*PHÂN LOẠI NHỮNG CÀ PHÊ BÁN CHẠY NHẤT */
+    const bestSellerBtn = document.getElementById("bestSeller");
+
+    bestSellerBtn.addEventListener("click", function(e){
+
+e.preventDefault();
+
+const bestSellerList = [
+"Cafe kem trứng",
+"Cafe phô mai",
+"Cafe sữa đá",
+"Cafe muối"
+];
+
+let filtered = reviewsData.filter(r =>
+bestSellerList.includes(r.category)
+);
+
+renderReviews(filtered);
+
+});
+
+/*PHÂN LOẠI NHỮNG CÀ PHÊ CÓ VỊ NGON NHẤT */
+const bestTasteBtn = document.getElementById("bestTaste");
+
+bestTasteBtn.addEventListener("click", function(e){
+
+e.preventDefault();
+
+const bestTasteList = [
+"Bạc xỉu",
+"Cafe sữa đá",
+"Cafe kem trứng"
+];
+
+let filtered = reviewsData.filter(r =>
+bestTasteList.includes(r.category)
+);
+
+renderReviews(filtered);
+
+});
+    // FILTER TOGGLE
+  const btn = document.getElementById("openFilter");
+    const filter = document.getElementById("reviewFilter");
+
+    btn.addEventListener("click", function(e){
+
+    e.preventDefault();
+
+    if(filter.style.display === "block"){
+
+            filter.style.display = "none";
+
+}else{
+
+filter.style.display = "block";
+
+renderReviews(reviewsData); 
+
+}
+
+});
+
+  // lấy API
+
+    const API =
+            "https://opensheet.elk.sh/1OxK3erQj7zsH9XsIGa1xhFgymQp58e0IvW7ct2zWSMU/Sheet1";
+
+    const container = document.getElementById("reviewsContainer");
+
+    let reviewsData = [];
+
+       fetch(API)
+            .then(res => res.json())
+            .then(data => {
+
+            reviewsData = data;
+
+            
+
+});
+
+
+
+
+
+function getStars(name){
+
+let stars = 4; 
+
+if(name === "Cafe phô mai") stars = 5;
+else if(name === "Cafe sữa đá") stars = 5;
+else if(name === "Cafe kem trứng") stars = 4;
+else if(name === "Cafe muối") stars = 4;
+else if(name === "Cacao sữa") stars = 4;
+else if(name === "Cafe Colombia Supremo") stars = 3;
+
+let starHTML = "";
+
+for(let i = 0; i < stars; i++){
+starHTML += '<i class="fa-solid fa-star" style="color:gold"></i>';
+}
+
+return starHTML;
+
+}
+
+// RENDER REVIEWS
+
+function renderReviews(list){
+
+let html = "";
+
+list.forEach(r => {
+
+html += `
+<div class="col-md-4 mb-4">
+
+<div class="card p-3 shadow-sm">
+
+<img src="assets/img/reviews/${r.img}" class="img-fluid mb-2">
+
+<h5>${r.category}</h5>
+
+<div class="stars">
+${getStars(r.category)}
+</div>
+
+<p>${r.comment}</p>
+
+<strong>${r.review_name}</strong>
+
+<br>
+
+<small>${r.date}</small>
+
+</div>
+
+</div>
+`;
+
+});
+
+container.innerHTML = html;
+
+}
+
+
+
+
+
+const radios = document.querySelectorAll('input[name="reviewFilter"]');
+
+radios.forEach(radio => {
+
+radio.addEventListener("change", function(){
+
+let value = this.value;
+
+if(value === "all"){
+renderReviews(reviewsData);
+}
+
+else if(value === "drinks"){
+
+const drinksList = [
+"Cafe kem trứng",
+"Cafe phô mai",
+"Expresso",
+"Bạc xỉu",
+"Cappuccino nóng",
+"Cafe sữa đá",
+"Cacao sữa",
+"Cafe muối"
+];
+
+let filtered = reviewsData.filter(r =>
+drinksList.includes(r.category)
+);
+
+renderReviews(filtered);
+
+}
+
+else if(value === "beans"){
+
+let filtered = reviewsData.filter(r =>
+r.category === "Cafe Colombia Supremo"
+);
+
+renderReviews(filtered);
+
+}
+
+});
+
+});
+</script>
+
+
+
+
+
+</body>
+
+
+</html>
+
+

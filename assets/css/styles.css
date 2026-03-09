@@ -1,0 +1,205 @@
+/* ===== MENU ===== */
+.menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-item {
+  position: relative;
+  display: inline-block;
+}
+
+/* menu */
+.menu-item > a {
+  color: var(--text-main);
+  text-decoration: none;
+  padding: 15px 20px;
+  display: block;
+  font-family: var(--font-sub);
+  transition: 0.25s;
+}
+
+/* hover */
+.menu-item > a:hover {
+  color: var(--primary-color);
+}
+
+
+.menu-item > a.active {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.review-filter{
+    display:flex;
+    gap:40px;
+    align-items:center;
+
+    background:#eee;
+    padding:15px 20px;
+    border-radius:6px;
+} 
+
+/* ===== DROPDOWN ===== */
+
+.dropdown{
+  position:absolute;
+  top:100%;
+  left:0;
+
+  width:420px;
+  background:#b86a12;
+
+  padding:20px 0;
+
+  display:none;
+  z-index:999;
+}
+
+.dropdown li{
+  list-style:none;
+}
+
+.dropdown a{
+  color:white;
+  padding:18px 35px;
+  display:block;
+  text-decoration:none;
+
+  letter-spacing:2px;
+  font-size:15px;
+}
+
+.dropdown a:hover{
+  background:rgba(255,255,255,0.1);
+}
+
+.has-dropdown:hover .dropdown{
+  display:block;
+}
+
+/* ===== mũi tên dropdown ===== */
+.has-arrow::after {
+  content: "▼";
+  font-size: 10px;
+  margin-left: 6px;
+  display: inline-block;
+  transition: 0.25s;
+}
+
+/* xoay mũi tên  */
+.has-dropdown:hover > .has-arrow::after {
+  transform: rotate(180deg);
+}
+
+#reviewFilter{
+  display:none;
+}
+
+/* ===== REVIEW FILTER ===== */
+
+.review-filter{
+    background:#e4d8d8;
+    padding:25px ;
+    border-radius:12px;
+
+    display:flex;
+    flex-direction:row;   
+    gap:70px;            
+    align-items:center;
+}
+
+
+
+
+
+.review-list{
+    max-width:1000px;
+}
+
+
+
+/* label option */
+.review-filter label{
+    display:inline-flex;  
+    align-items:center;
+    gap: 12px;
+    font-size:18px;
+    margin-right:20px;
+    white-space:nowrap;  
+}
+
+.review-filter input[type="radio"]{
+    transform:scale(1.2);
+}
+
+
+/* radio size */
+.review-filter input[type="radio"]{
+    transform:scale(1.1);
+}
+
+
+
+/* hover cho đẹp hơn */
+.review-filter label:hover{
+    color:#083181;
+}
+
+.reviewFilter{
+  display:none;
+}
+
+/*CHỈNH CHỮ IN ĐẬM*/
+.review-filter label strong{
+  font-weight: 600;
+}
+
+/*CHỈNH FONT CHỮ */
+.dropdown a{
+    font-family: "Bahnschrift SemiBold", Bahnschrift, sans-serif;
+    font-weight: 600;
+}
+
+
+.danhgia-tile{
+  font family:"Bahnschrift SemiBold", Bahnschrift, sans-serif;
+  font-weight: 600; 
+  font-size: 20px; 
+  letter-spacing: 1px; 
+  color: #6b3e26; 
+}
+
+.review-card img{
+height:200px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.stars{
+margin:6px 0 8px;
+font-size:14px;
+color:gold;
+}
+
+
+
+#reviewFilter{
+display:none;
+}
+
+.card p{
+display:-webkit-box;
+-webkit-line-clamp:3;
+-webkit-box-orient:vertical;
+overflow:hidden;
+}
+
+
+.card{
+height:100%;
+display:flex;
+flex-direction:column;
+}
+
